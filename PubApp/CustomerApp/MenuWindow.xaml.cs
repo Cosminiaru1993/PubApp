@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PubDataLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,28 +11,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 namespace CustomerApp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MenuWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MenuWindow : Window
     {
-        
-        public MainWindow()
+        public MenuWindow()
         {
             InitializeComponent();
+            listboxCategory.ItemsSource= CategoryRetriver.GetAllCategories();
         }
 
-        private void btnMenu_Click(object sender, RoutedEventArgs e)
+        private void listboxCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Mw.Background = Brushes.Red;
-            MenuWindow menu = new MenuWindow();
-            menu.Show();
-            this.Close();
+
+
         }
     }
 }

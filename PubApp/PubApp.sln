@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaiterApp", "WaiterApp\Wait
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApp", "CustomerApp\CustomerApp.csproj", "{B447FADE-CA0A-478F-9354-0ADCABD2A210}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubDataLayer", "PubDataLayer\PubDataLayer.csproj", "{9A985D4A-5B80-4488-9643-AAADF8D7DD6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B447FADE-CA0A-478F-9354-0ADCABD2A210}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B447FADE-CA0A-478F-9354-0ADCABD2A210}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B447FADE-CA0A-478F-9354-0ADCABD2A210}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A985D4A-5B80-4488-9643-AAADF8D7DD6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A985D4A-5B80-4488-9643-AAADF8D7DD6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A985D4A-5B80-4488-9643-AAADF8D7DD6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A985D4A-5B80-4488-9643-AAADF8D7DD6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

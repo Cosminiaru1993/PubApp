@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Height="350" Width="525" Background="Green" Name="Mw"  >
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1"  Orientation="Vertical" VerticalAlignment="Center" >
+            <Button  Content="Meniu" Margin="5" Width="155" Height="90"  Background="LightGreen" Name="btnMenu" Click="btnMenu_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
