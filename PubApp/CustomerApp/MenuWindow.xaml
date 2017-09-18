@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
         Title="MenuWindow" MinHeight="600" MinWidth="800" 
-         Style="{DynamicResource PubApp_menu}">
+         Style="{DynamicResource PubApp_menu}" Background="#FFF5F8FC">
     <Window.Resources>
 
         <ControlTemplate x:Key="WindowTemplateKey" TargetType="{x:Type Window}">
@@ -96,12 +96,49 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ListBoxProduse" TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="{StaticResource ListBox.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ListBox.Static.Border}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true" CornerRadius="3" >
+                            <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Border}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsGrouping" Value="true"/>
+                                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </Window.Resources>
-    <Grid>
+    <Grid Margin="0,8,0,-8" Background="#FFC55900">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -110,5 +147,39 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Text="Categorii produse"  Width="auto" Height="auto" FontFamily="Buxton Sketch" FontSize="22" />
         <ListBox Grid.Row="1" SelectionMode="Single" Name="listboxCategory"  SelectionChanged="listboxCategory_SelectionChanged" Style="{DynamicResource Categories}" FontFamily="Buxton Sketch" FontSize="18" Foreground="Black" BorderBrush="{x:Null}" DisplayMemberPath="name"/>
+        <ListBox Grid.Row="1" Grid.Column="1" Name="listboxProducts" SelectionChanged="listboxProducts_SelectionChanged" Background="#FFB26D1B" Style="{DynamicResource ListBoxProduse}" BorderBrush="{x:Null}" SelectionMode="Multiple">
+            <!-- cum sunt asezati itemii din lista-->
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <!-- cum e un item din lista-->
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Red" BorderThickness="1" Margin="5"
+                            Width="130" Height="50">
+                        <Grid Margin="10" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Path=name }" Grid.Column="0"  />
+                            <TextBlock Text="{Binding Path=price}" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition  />
+            <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <ListBox ItemsSource="{Binding Path=productsOrdered}" DisplayMemberPath="name">
+            </ListBox>
+            <TextBlock Grid.Column="1" Text="total"/>
+        </Grid>
     </Grid>
 </Window>

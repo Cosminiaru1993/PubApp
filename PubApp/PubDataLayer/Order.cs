@@ -21,9 +21,9 @@ namespace PubDataLayer
         }
     
         public int id { get; set; }
-        public string comments { get; set; }
         public System.DateTime date { get; set; }
-        public byte[] is_paid { get; set; }
+        public string comment { get; set; }
+        public bool is_paid { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_Order> Product_Order { get; set; }

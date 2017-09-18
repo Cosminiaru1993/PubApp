@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace PubDataLayer
 {
-    class ProductRetriver
+    public class ProductRetriver
     {
+        public static IEnumerable<Product> GetAllProductsByCategoryId(int categoryId)
+        {
+            using (PubAppEntities context = new PubAppEntities())
+            {
+                return context.Products.Where(product => product.category_id == categoryId).ToList();
+            }
+            return new List<Product>();
+        }
     }
 }

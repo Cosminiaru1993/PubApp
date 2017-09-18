@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="19ef154325134a4f8558f3ce81dd7289" Name="Diagram1">
-        <EntityTypeShape EntityType="PubAppModel.Category" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PubAppModel.Order" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PubAppModel.Product" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PubAppModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PubAppModel.Product_Order" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="PubAppModel.FK_Product_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="PubAppModel.FK_Product_Order_Order" ManuallyRouted="false" />
-        <AssociationConnector Association="PubAppModel.FK_Product_Order_Product" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PubAppModel.Category" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="PubAppModel.Order" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="PubAppModel.Product" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="PubAppModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="PubAppModel.Product_Order" Width="1.5" PointX="5.25" PointY="0.875" />
+        <AssociationConnector Association="PubAppModel.FK_Product_Category" />
+        <AssociationConnector Association="PubAppModel.FK_Product_Order_Order" />
+        <AssociationConnector Association="PubAppModel.FK_Product_Order_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
