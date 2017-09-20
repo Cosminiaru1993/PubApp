@@ -66,7 +66,7 @@ namespace CustomerApp
 
         private void listboxProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-             
+
 
             if (listboxProducts.SelectedItem != null)
             {
@@ -85,7 +85,7 @@ namespace CustomerApp
                 }
                 else
                 {
-                    productWithQuantity.Quantity= productWithQuantity.Quantity+1;
+                    productWithQuantity.Quantity = productWithQuantity.Quantity + 1;
                     Sum = Sum + selectedProduct.price;
                 }
                 listboxProducts.SelectedItem = null;
@@ -94,7 +94,31 @@ namespace CustomerApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Order order = new Order();
+                order.date = DateTime.Now;
+                order.is_paid = false;
+                foreach (ProductWithQuantity p in productsOrdered)
+                {
+                    Product_Order producInOrder = new Product_Order();
+                    producInOrder.price = p.price;
+                    producInOrder.quantity = p.Quantity;
+                    producInOrder.product_id = p.id;
 
+                    order.Product_Order.Add(producInOrder);
+
+                }
+
+                if (OrderRetriver.AddOrder(order))
+                {
+                    MessageBox.Show("Order Added", "Order", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error has ocured:" + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

@@ -9,11 +9,11 @@
         <EntityTypeShape EntityType="PubAppModel.Order" Width="1.5" PointX="3" PointY="5" />
         <EntityTypeShape EntityType="PubAppModel.Product" Width="1.5" PointX="3" PointY="0.875" />
         <EntityTypeShape EntityType="PubAppModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" />
-        <EntityTypeShape EntityType="PubAppModel.Product_Order" Width="1.5" PointX="5.25" PointY="0.875" />
         <AssociationConnector Association="PubAppModel.FK_Product_Category" />
+        <EntityTypeShape EntityType="PubAppModel.Product_Order" Width="1.5" PointX="5.25" PointY="0.75" />
         <AssociationConnector Association="PubAppModel.FK_Product_Order_Order" />
         <AssociationConnector Association="PubAppModel.FK_Product_Order_Product" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

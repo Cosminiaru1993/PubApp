@@ -14,10 +14,11 @@ namespace PubDataLayer
     
     public partial class Product_Order
     {
+        public int id { get; set; }
         public int order_id { get; set; }
         public int product_id { get; set; }
-        public int quantity { get; set; }
         public double price { get; set; }
+        public int quantity { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }

@@ -30,19 +30,15 @@
           <Property Name="price" Type="float" Nullable="false" />
           <Property Name="category_id" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'PubApp.dbo.Product_Order' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Product_Order">
           <Key>
-            <PropertyRef Name="order_id" />
-            <PropertyRef Name="product_id" />
-            <PropertyRef Name="quantity" />
-            <PropertyRef Name="price" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="order_id" Type="int" Nullable="false" />
           <Property Name="product_id" Type="int" Nullable="false" />
-          <Property Name="quantity" Type="int" Nullable="false" />
           <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -94,15 +90,8 @@ warning 6002: The table/view 'PubApp.dbo.Product_Order' does not have a primary 
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Order" EntityType="Self.Product_Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product_Order" EntityType="Self.Product_Order" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Product_Order].[order_id] AS [order_id], 
-    [Product_Order].[product_id] AS [product_id], 
-    [Product_Order].[quantity] AS [quantity], 
-    [Product_Order].[price] AS [price]
-    FROM [dbo].[Product_Order] AS [Product_Order]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
@@ -125,11 +114,11 @@ warning 6002: The table/view 'PubApp.dbo.Product_Order' does not have a primary 
           <EntitySet Name="Orders" EntityType="PubAppModel.Order" />
           <EntitySet Name="Products" EntityType="PubAppModel.Product" />
           <EntitySet Name="sysdiagrams" EntityType="PubAppModel.sysdiagram" />
-          <EntitySet Name="Product_Order" EntityType="PubAppModel.Product_Order" />
           <AssociationSet Name="FK_Product_Category" Association="PubAppModel.FK_Product_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
+          <EntitySet Name="Product_Order" EntityType="PubAppModel.Product_Order" />
           <AssociationSet Name="FK_Product_Order_Order" Association="PubAppModel.FK_Product_Order_Order">
             <End Role="Order" EntitySet="Orders" />
             <End Role="Product_Order" EntitySet="Product_Order" />
@@ -138,7 +127,7 @@ warning 6002: The table/view 'PubApp.dbo.Product_Order' does not have a primary 
             <End Role="Product" EntitySet="Products" />
             <End Role="Product_Order" EntitySet="Product_Order" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="id" />
@@ -178,20 +167,6 @@ warning 6002: The table/view 'PubApp.dbo.Product_Order' does not have a primary 
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Product_Order">
-          <Key>
-            <PropertyRef Name="order_id" />
-            <PropertyRef Name="product_id" />
-            <PropertyRef Name="quantity" />
-            <PropertyRef Name="price" />
-          </Key>
-          <Property Name="order_id" Type="Int32" Nullable="false" />
-          <Property Name="product_id" Type="Int32" Nullable="false" />
-          <Property Name="quantity" Type="Int32" Nullable="false" />
-          <Property Name="price" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="PubAppModel.FK_Product_Order_Order" FromRole="Product_Order" ToRole="Order" />
-          <NavigationProperty Name="Product" Relationship="PubAppModel.FK_Product_Order_Product" FromRole="Product_Order" ToRole="Product" />
-        </EntityType>
         <Association Name="FK_Product_Category">
           <End Type="PubAppModel.Category" Role="Category" Multiplicity="1" />
           <End Type="PubAppModel.Product" Role="Product" Multiplicity="*" />
@@ -204,6 +179,18 @@ warning 6002: The table/view 'PubApp.dbo.Product_Order' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Product_Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="PubAppModel.FK_Product_Order_Order" FromRole="Product_Order" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="PubAppModel.FK_Product_Order_Product" FromRole="Product_Order" ToRole="Product" />
+        </EntityType>
         <Association Name="FK_Product_Order_Order">
           <End Type="PubAppModel.Order" Role="Order" Multiplicity="1" />
           <End Type="PubAppModel.Product_Order" Role="Product_Order" Multiplicity="*" />
@@ -228,7 +215,7 @@ warning 6002: The table/view 'PubApp.dbo.Product_Order' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -276,10 +263,11 @@ warning 6002: The table/view 'PubApp.dbo.Product_Order' does not have a primary 
           <EntitySetMapping Name="Product_Order">
             <EntityTypeMapping TypeName="PubAppModel.Product_Order">
               <MappingFragment StoreEntitySet="Product_Order">
-                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
