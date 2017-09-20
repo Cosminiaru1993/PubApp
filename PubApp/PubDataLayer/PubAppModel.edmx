@@ -20,6 +20,7 @@
           <Property Name="date" Type="datetime" Nullable="false" />
           <Property Name="comment" Type="nvarchar(max)" />
           <Property Name="is_paid" Type="bit" Nullable="false" />
+          <Property Name="table_number" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -145,6 +146,7 @@
           <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="is_paid" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Product_Order" Relationship="PubAppModel.FK_Product_Order_Order" FromRole="Order" ToRole="Product_Order" />
+          <Property Name="table_number" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -232,6 +234,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="PubAppModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="table_number" ColumnName="table_number" />
                 <ScalarProperty Name="is_paid" ColumnName="is_paid" />
                 <ScalarProperty Name="comment" ColumnName="comment" />
                 <ScalarProperty Name="date" ColumnName="date" />

@@ -95,13 +95,14 @@ namespace CustomerApp.UserControls
                 Order order = new Order();
                 order.date = DateTime.Now;
                 order.is_paid = false;
+                order.table_number = int.Parse(System.Configuration.ConfigurationManager.AppSettings["TableNumber"]);
+
                 foreach (ProductWithQuantity p in productsOrdered)
                 {
                     Product_Order producInOrder = new Product_Order();
                     producInOrder.price = p.price;
                     producInOrder.quantity = p.Quantity;
                     producInOrder.product_id = p.id;
-
                     order.Product_Order.Add(producInOrder);
 
                 }
