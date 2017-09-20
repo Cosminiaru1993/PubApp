@@ -115,6 +115,7 @@ namespace CustomerApp.UserControls
             {
                 MessageBox.Show("An error has ocured:" + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+           (App.Current.MainWindow as CustomerWindow).LoadOrder();
         }
     }
 }

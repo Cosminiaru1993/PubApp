@@ -30,5 +30,11 @@ namespace CustomerApp
             MenuUserControl uc = new MenuUserControl();
             this.Content = uc;
         }
+
+        public void LoadOrder()
+        {
+            OrderInfo uc = new OrderInfo();
+            this.Content = uc;
+        }
     }
 }
