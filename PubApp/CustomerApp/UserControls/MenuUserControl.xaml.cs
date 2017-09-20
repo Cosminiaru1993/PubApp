@@ -12,17 +12,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-namespace CustomerApp
+namespace CustomerApp.UserControls
 {
-
     /// <summary>
-    /// Interaction logic for MenuWindow.xaml
+    /// Interaction logic for MenuUserControl.xaml
     /// </summary>
-    public partial class MenuWindow : Window
+    public partial class MenuUserControl : UserControl
     {
+        public MenuUserControl()
+        {
+            InitializeComponent();
+            listboxCategory.ItemsSource = CategoryRetriver.GetAllCategories();
+            productsOrdered = new ObservableCollection<ProductWithQuantity>();
+            this.DataContext = this;
+        }
 
         public ObservableCollection<ProductWithQuantity> productsOrdered
         {
@@ -40,18 +46,8 @@ namespace CustomerApp
 
         // Using a DependencyProperty as the backing store for Sum.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SumProperty =
-            DependencyProperty.Register("Sum", typeof(double), typeof(MenuWindow), new PropertyMetadata(0.0));
+            DependencyProperty.Register("Sum", typeof(double), typeof(MenuUserControl), new PropertyMetadata(0.0));
 
-
-
-        public MenuWindow()
-        {
-            InitializeComponent();
-            listboxCategory.ItemsSource = CategoryRetriver.GetAllCategories();
-            productsOrdered = new ObservableCollection<ProductWithQuantity>();
-            this.DataContext = this;
-
-        }
 
         private void listboxCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

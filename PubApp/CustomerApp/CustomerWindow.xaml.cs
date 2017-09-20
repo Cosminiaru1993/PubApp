@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomerApp.UserControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,28 +11,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CustomerApp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CustomerWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CustomerWindow : Window
     {
-        
-        public MainWindow()
+        public CustomerWindow()
         {
             InitializeComponent();
         }
 
-        private void btnMenu_Click(object sender, RoutedEventArgs e)
+        public void LoadMenu()
         {
-            Mw.Background = Brushes.Red;
-            MenuWindow menu = new MenuWindow();
-            menu.Show();
-            this.Close();
+            MenuUserControl uc = new MenuUserControl();
+            this.Content = uc;
         }
     }
 }

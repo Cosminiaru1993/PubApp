@@ -1,11 +1,10 @@
-﻿<Window x:Class="CustomerApp.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CustomerApp"
-        mc:Ignorable="d"
-        Height="350" Width="525" Background="Green" Name="Mw"  >
+﻿<UserControl x:Class="CustomerApp.UserControls.FreeTableUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CustomerApp.UserControls"
+             Background="Green">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -20,4 +19,4 @@
             <Button  Content="Meniu" Margin="5" Width="155" Height="90"  Background="LightGreen" Name="btnMenu" Click="btnMenu_Click"/>
         </StackPanel>
     </Grid>
-</Window>
+</UserControl>
