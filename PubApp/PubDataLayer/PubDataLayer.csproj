@@ -85,12 +85,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="packages.config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="PubAppModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PubAppModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="packages.config" />
     <None Include="PubAppModel.edmx.diagram">
       <DependentUpon>PubAppModel.edmx</DependentUpon>
     </None>

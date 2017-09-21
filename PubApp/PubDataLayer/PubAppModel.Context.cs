@@ -15,8 +15,7 @@ namespace PubDataLayer
     
     public partial class PubAppEntities : DbContext
     {
-        public PubAppEntities()
-            : base("name=PubAppEntities")
+        public PubAppEntities() : base("name=PubAppEntities")
         {
         }
     
