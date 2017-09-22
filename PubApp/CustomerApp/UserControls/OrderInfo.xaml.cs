@@ -23,5 +23,6 @@ namespace CustomerApp.UserControls
         {
             InitializeComponent();
         }
+
     }
 }

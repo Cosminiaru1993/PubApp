@@ -32,7 +32,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Window}">
-                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="#FF04046A">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="#FF19C2D3">
                             <AdornerDecorator>
                                 <ContentPresenter/>
                             </AdornerDecorator>
@@ -76,21 +76,21 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" BorderThickness="1" Background="#FF2FAA34" SnapsToDevicePixels="true" BorderBrush="Black" CornerRadius="4">
+                        <Border x:Name="border" BorderThickness="1" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" BorderBrush="Black" CornerRadius="4">
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
+                            <!--<Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
-                            </Trigger>
+                            </Trigger>-->
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
@@ -152,35 +152,67 @@
             <ColumnDefinition Width="5*" />
             <ColumnDefinition Width="6*" />
         </Grid.ColumnDefinitions>
-        <UniformGrid Grid.Row="0" Grid.ColumnSpan="2" Columns="3" Rows="2">
-            <Button Content="Masa 1" Style="{DynamicResource TableNumberStyle}" Margin="3" FontFamily="Buxton Sketch" FontSize="24" 
+        <ItemsControl Grid.Row="0" Grid.ColumnSpan="2" Name="listBoxTables">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3" Rows="2"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button  Background="{Binding Path=BackgroundBrush}"
+                            Style="{DynamicResource TableNumberStyle}" Margin="3"
+                            Click="btnTable_Click"
+                            FontFamily="Buxton Sketch" FontSize="24">
+                        <TextBlock Text="{Binding Path=Number, StringFormat='{}Masa {0}'}"/>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--<Button Content="Masa 1"  
                     Name="btnTable1" Click="btnTable1_Click"/>
             <Button Content="Masa 2" Style="{DynamicResource TableNumberStyle}" Margin="3" FontFamily="Buxton Sketch" FontSize="24"
-                    Name="btnTable2"/>
+                    Name="btnTable2" Click="btnTable2_Click"/>
             <Button Content="Masa 3" Style="{DynamicResource TableNumberStyle}" Margin="3" FontFamily="Buxton Sketch" FontSize="24"
-                    Name="btnTable3"/>
+                    Name="btnTable3" Click="btnTable3_Click"/>
             <Button Content="Masa 4" Style="{DynamicResource TableNumberStyle}" Margin="3" FontFamily="Buxton Sketch" FontSize="24"
                     Name="btnTable4"/>
             <Button Content="Masa 5" Style="{DynamicResource TableNumberStyle}" Margin="3" FontFamily="Buxton Sketch" FontSize="24"
                     Name="btnTable5"/>
             <Button Content="Masa 6" Style="{DynamicResource TableNumberStyle}" Margin="3" FontFamily="Buxton Sketch" FontSize="24"
                     Name="btnTable6"/>
-        </UniformGrid>
-        <Grid Grid.Column="0" Grid.Row="1" Margin="4">
+        </UniformGrid>-->
+        <Grid Grid.Column="0" Grid.Row="1" Margin="4" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="6*"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Comanda: " Width="auto" Margin="4" FontFamily="Buxton Sketch" FontSize="28"/>
-            <ListBox Grid.Row="1"  Margin="4" Style="{DynamicResource OrderViewStyle}" Name="listboxProductsInOrder" ItemsSource="{Binding Path=productsOrdered}" />
-        </Grid>
-        <Grid Grid.Column="1" Grid.Row="1" Margin="4">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="6*"/>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Mentiuni: " Width="auto" Margin="4" FontFamily="Buxton Sketch" FontSize="28"/>
-            <ListBox Grid.Row="1"  Margin="4" Style="{DynamicResource OrderViewStyle}"/>
+            <TextBlock Text="{Binding Path=Number, StringFormat='{}Comanda de la masa {0}'}" 
+                       Name="textblockOrder"
+                       Width="auto" Margin="4" FontFamily="Buxton Sketch" FontSize="28"/>
+            <ListBox Grid.Row="1"  Margin="4" Style="{DynamicResource OrderViewStyle}" Name="listboxProductsInOrder">
+                <!-- cum sunt asezati itemii din lista-->
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid VerticalAlignment="Top" HorizontalAlignment="Left" Width="auto"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <!-- cum e un item din lista-->
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="2" Opacity="50">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="{Binding Path=Product.name}" Margin="0,0,5,0" FontWeight="Bold" FontFamily="Buxton Sketch" FontSize="24" />
+                            <TextBlock Grid.Row="1" Text="{Binding Path=quantity, StringFormat='{}{0} buc'}" Margin="0,0,5,0"  FontWeight="Bold" FontFamily="Buxton Sketch" FontSize="24" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 </Window>

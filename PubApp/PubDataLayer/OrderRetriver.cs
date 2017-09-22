@@ -22,13 +22,22 @@ namespace PubDataLayer
             }
         }
 
-        public static Order GetOrderFromTable(int tableNo)
+        public static Order GetInProgresOrderFromTable(int tableNo)
         {
             using (PubAppEntities context = new PubAppEntities())
             {
-                return context.Orders.Include("Product_Order")
+                return context.Orders.Include("Product_Order").Include("Product_Order.Product")
                     .OrderByDescending(order=> order.date)
-                    .FirstOrDefault(order => order.table_number == tableNo);
+                    .FirstOrDefault(order => order.table_number == tableNo && order.is_paid==false);
+            }
+        }
+
+        public static bool HasTableOrderInProgres(int tableNo)
+        {
+            using (PubAppEntities context = new PubAppEntities())
+            {
+                Order inProgressOrder = context.Orders.OrderByDescending(order => order.date).FirstOrDefault(order => order.table_number == tableNo && order.is_paid == false);
+                return (inProgressOrder != null);
             }
         }
     }
