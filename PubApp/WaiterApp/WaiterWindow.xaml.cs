@@ -39,7 +39,7 @@ namespace WaiterApp
         public static readonly DependencyProperty BackgroundBrushProperty =
             DependencyProperty.Register("BackgroundBrush", typeof(Brush), typeof(Table), new PropertyMetadata(Brushes.Green));
 
-
+        public int OrderId { get; set; }
 
         public Table(int number)
         {
@@ -98,11 +98,33 @@ namespace WaiterApp
                         Order order = OrderRetriver.GetInProgresOrderFromTable(tableNumber);
                         if (order != null)
                         {
+                            table.OrderId = order.id;
                             listboxProductsInOrder.ItemsSource = order.Product_Order;
                             textblockOrder.DataContext = table;
-
+                            payBtn.IsEnabled = true;
                         }
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error has ocured:" + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void payBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Table table = textblockOrder.DataContext as Table;
+                if (table != null)
+                {
+                    OrderRetriver.MarkOrderIsPaid(table.OrderId);
+                    UpdateTablesState();
+
+                    listboxProductsInOrder.ItemsSource = null;
+                    textblockOrder.DataContext = null; ;
+                    payBtn.IsEnabled = false;
                 }
             }
             catch (Exception ex)

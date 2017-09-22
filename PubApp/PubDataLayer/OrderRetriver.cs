@@ -40,5 +40,18 @@ namespace PubDataLayer
                 return (inProgressOrder != null);
             }
         }
+
+        public static bool MarkOrderIsPaid(int orderId)
+        {
+            using (PubAppEntities context = new PubAppEntities())
+            {
+                Order order = context.Orders.SingleOrDefault(ord => ord.id == orderId);
+                if (order != null)
+                {
+                    order.is_paid = true;
+                }
+                return context.SaveChanges()>0;
+            }
+        } 
     }
 }

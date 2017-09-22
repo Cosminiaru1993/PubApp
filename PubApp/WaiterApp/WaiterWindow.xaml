@@ -189,10 +189,16 @@
                 <RowDefinition/>
                 <RowDefinition Height="6*"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="{Binding Path=Number, StringFormat='{}Comanda de la masa {0}'}" 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Path=Number, StringFormat='{}Comanda de la masa {0}'}" 
                        Name="textblockOrder"
                        Width="auto" Margin="4" FontFamily="Buxton Sketch" FontSize="28"/>
-            <ListBox Grid.Row="1"  Margin="4" Style="{DynamicResource OrderViewStyle}" Name="listboxProductsInOrder">
+            <Button Grid.Column="1" Grid.Row="0" Content="Genereaza Nota"
+                    IsEnabled="False" Name="payBtn" Click="payBtn_Click"/>
+            <ListBox Grid.Row="1" Grid.ColumnSpan="2"  Margin="4" Style="{DynamicResource OrderViewStyle}" Name="listboxProductsInOrder">
                 <!-- cum sunt asezati itemii din lista-->
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
